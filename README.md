@@ -47,11 +47,7 @@ INTERACTIVE-DEVELOPER/
 │   ├── css/
 │   │   └── style.css
 │   ├── js/
-│   │   └── carousel.js
-│   └── assets/
-│       ├── slide1.jpg
-│       ├── slide2.jpg
-│       └── slide3.jpg
+│       └── carousel.js
 │
 ├── 03-weather-banner/
 │   ├── 300x250.html
@@ -69,10 +65,6 @@ INTERACTIVE-DEVELOPER/
 │   │   └── dynamic-engine.js
 │   └── data/
 │       └── content.json      <-- Aquí irían tus 20-30 registros de IA
-│
-├── shared/                   <-- (Opcional) Recursos compartidos
-│   ├── fonts/
-│   └── logos/
 │
 ├── README.md                 <-- El texto que preparamos antes
 └── .gitignore                <-- Para excluir archivos innecesarios
