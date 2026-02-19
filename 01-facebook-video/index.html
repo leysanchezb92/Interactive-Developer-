@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-</body>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Facebook Interactivo</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="banner-container-1" class="banner-300x600">
+            <div id="interaction-counter-1" class="counter-display">Interacciones: 0</div>
+            <div class="click-layer" onclick="goToURL(event)"></div>
+            <div id="main-video-1" class="youtube-player"></div>
+            <div class="controls-overlay">
+                <button onclick="videoAction(event, 'play')">Play</button>
+                <button onclick="videoAction(event, 'pause')">Pause</button>
+                <button onclick="videoAction(event, 'mute')">Mute/Unmute</button>
+            </div>
+        </div>
+        <div id="banner-container-2" class="banner-320x480">
+            <div id="interaction-counter-2" class="counter-display">Interacciones: 0</div>
+            <div class="click-layer" onclick="goToURL(event)"></div>
+            <div id="main-video-2" class="youtube-player"></div>
+            <div class="controls-overlay">
+                <button onclick="videoAction(event, 'play')">Play</button>
+                <button onclick="videoAction(event, 'pause')">Pause</button>
+                <button onclick="videoAction(event, 'mute')">Mute/Unmute</button>
+            </div>
+        </div>
+        <!-- API IFrame de YouTube (necesaria para controlar el player desde JS) -->
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <!-- Script principal: controla el reproductor y el contador de interacciones -->
+        <script src="main.js"></script>
+    </body>
 </html>

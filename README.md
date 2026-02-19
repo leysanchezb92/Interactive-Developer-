@@ -32,17 +32,15 @@ Banner conectado a un endpoint con más de 20 registros de contenido generado po
 
 ## Estructura del proyecto:
 
-AD-TECH-BANNER-SUITE/
+```
+INTERACTIVE-DEVELOPER/
 │
 ├── 01-facebook-video/
 │   ├── index.html
 │   ├── css/
 │   │   └── style.css
 │   ├── js/
-│   │   └── main.js
-│   └── assets/
-│       ├── video.mp4
-│       └── poster.jpg
+│       └── main.js
 │
 ├── 02-instagram-carousel/
 │   ├── index.html
@@ -78,6 +76,7 @@ AD-TECH-BANNER-SUITE/
 │
 ├── README.md                 <-- El texto que preparamos antes
 └── .gitignore                <-- Para excluir archivos innecesarios
+```
 
 ## 📊 Medición y Eventos
 
