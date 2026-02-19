@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Instagram Carousel</title>
+    </head>
+    <body>
+        <div id="banner-container" class="size-300x600">
+            <button class="nav-btn prev" id="btn-prev">&#10094;</button>
+            <button class="nav-btn next" id="btn-next">&#10095;</button>
+            <div class="dots-container" id="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="track">               
+                    <article class="slide" data-index="1" data-url="https://www.wppmedia.com/client1" style="background-image: url('https://picsum.photos/300/600?random=1')">
+                        <div class="info-overlay">
+                            <span>Novedades</span>
+                            <h3>Colección Otoño</h3>
+                        </div>
+                    </article>
+                    <article class="slide" data-index="2" data-url="https://www.wppmedia.com/client2" style="background-image: url('https://picsum.photos/300/600?random=2')">
+                        <div class="info-overlay">
+                            <span>Oferta</span>
+                            <h3>50% de Descuento</h3>
+                        </div>
+                    </article>
+                    <article class="slide" data-index="3" data-url="https://www.wppmedia.com/client3" style="background-image: url('https://picsum.photos/300/600?random=3')">
+                        <div class="info-overlay">
+                            <span>Exclusivo</span>
+                            <h3>Solo en Web</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <script src="carousel.js"></script>
+    </body>
+</html>

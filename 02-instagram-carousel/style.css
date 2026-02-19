@@ -1,0 +1,90 @@
+/* Configuración de Dimensiones */
+.size-300x600 { width: 300px; height: 600px; }
+.size-320x480 { width: 320px; height: 480px; }
+
+#banner-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+    border: 1px solid #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Carrusel Core */
+.carousel-viewport {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    width: 300%; /* (100% * número de slides) */
+    height: 100%;
+    transition: transform 0.4s ease-out;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Superposición de Texto */
+.info-overlay {
+    width: 100%;
+    padding: 40px 15px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    color: white;
+}
+
+.info-overlay h3 { margin: 5px 0 0; font-size: 1.2rem; }
+.info-overlay span { text-transform: uppercase; font-size: 0.7rem; font-weight: bold; color: #ff3e3e; }
+
+/* Botones Navegación */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Indicadores Puntos */
+.dots-container {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.dot.active { 
+    background: #fff; 
+    width: 12px; 
+    border-radius: 4px; 
+}
