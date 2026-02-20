@@ -1,47 +1,74 @@
-// Simulación de un endpoint con 25 registros generados con IA
-const endpointData = [
-  { id: 1, text: "Descubre la nueva colección de zapatillas urbanas." },
-  { id: 2, text: "Innovación y estilo en cada paso." },
-  { id: 3, text: "Tu look merece un upgrade." },
-  { id: 4, text: "Diseños creados con inteligencia artificial." },
-  { id: 5, text: "Explora moda que piensa en ti." },
-  { id: 6, text: "Tecnología y tendencia en un solo producto." },
-  { id: 7, text: "El futuro de la moda está aquí." },
-  { id: 8, text: "Cada prenda cuenta una historia única." },
-  { id: 9, text: "Estilo que se adapta a tu país y cultura." },
-  { id: 10, text: "Personaliza tu outfit con IA." },
-  { id: 11, text: "Moda sostenible con visión tecnológica." },
-  { id: 12, text: "Diseños exclusivos generados por algoritmos." },
-  { id: 13, text: "Tu marca favorita reinventada con IA." },
-  { id: 14, text: "Explora tendencias globales al instante." },
-  { id: 15, text: "Creatividad ilimitada en cada producto." },
-  { id: 16, text: "La moda que evoluciona contigo." },
-  { id: 17, text: "Estilo premium con inteligencia artificial." },
-  { id: 18, text: "Diseños que rompen fronteras." },
-  { id: 19, text: "Tu outfit, tu identidad, tu IA." },
-  { id: 20, text: "Explora lo inesperado en cada colección." },
-  { id: 21, text: "Moda que entiende tus preferencias." },
-  { id: 22, text: "Diseños creados para tu país y cultura." },
-  { id: 23, text: "Cada producto es único gracias a IA." },
-  { id: 24, text: "Tu estilo, potenciado por algoritmos." },
-  { id: 25, text: "La moda del mañana, hoy." }
-];
+/**
+ * Fetches ad content from the AI backend.
+ *
+ * @param {Object} params - Query parameters (e.g., { brand, country, product }).
+ * @returns {Promise<Object>} - Object with fields expected by the UI:
+ *                              { text: string, cta?: string, color?: string }
+ */
+async function fetchAdContent(params = {}) {
+  const queryString = new URLSearchParams(params).toString();
+  const url = `http://localhost:3000/api/content?${queryString}`;
 
-// Función para obtener contenido aleatorio
-function getRandomContent() {
-  const randomIndex = Math.floor(Math.random() * endpointData.length);
-  return endpointData[randomIndex].text;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching AI content:", error);
+    // Default fallback content to keep the banner usable offline / on error
+    return {
+      text: "Calidad y estilo en cada paso.",
+      cta: "Ver más",
+      color: "#222222"
+    };
+  }
 }
 
-// Insertar contenido en los banners
-document.getElementById("banner-text-250").innerText = getRandomContent();
-document.getElementById("banner-text-600").innerText = getRandomContent();
+/**
+ * Populates a banner of a given size with fetched content.
+ *
+ * @param {string|number} size - The banner size identifier used in element IDs/classes (e.g., "250", "600").
+ * @param {Object} params - Parameters forwarded to the AI endpoint (brand, country, product, etc).
+ */
+async function setupBanner(size, params) {
+  const data = await fetchAdContent(params);
 
-// CTA con acción simulada
+  const textElem = document.getElementById(`banner-text-${size}`);
+  const ctaElem = document.getElementById(`cta-${size}`);
+  const bannerContainer = document.getElementsByClassName(`banner-${size}`)[0];
+
+  if (!bannerContainer) {
+    console.warn(`Banner container not found for size: ${size}`);
+    return;
+  }
+
+  if (data) {
+    if (textElem) textElem.innerText = data.text;
+    if (ctaElem) ctaElem.innerText = data.cta || "Ver más";
+
+    if (data.color) bannerContainer.style.backgroundColor = data.color;
+    bannerContainer.classList.add('banner-visible');
+  }
+}
+
+/**
+ * Immediately initialize the banners you want on page load.
+ * Adjust sizes and params as needed.
+ */
+(async () => {
+  setupBanner("250", { brand: "Nike", country: "Colombia", product: "zapatillas" });
+  setupBanner("600", { brand: "Adidas", country: "España", product: "camisetas" });
+})();
+
+/**
+ * CTA click handlers.
+ * These assume the CTA elements exist; if not, the code will throw.
+ * Wraps `window.open` to open the target branding site in a new tab.
+ */
 document.getElementById("cta-250").addEventListener("click", () => {
-  alert("Redirigiendo a la tienda...");
+  window.open("https://www.nike.com/co/", "_blank");
 });
 
 document.getElementById("cta-600").addEventListener("click", () => {
-  alert("Explora más productos...");
+  window.open("https://www.adidas.es/", "_blank");
 });
