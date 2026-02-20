@@ -82,6 +82,26 @@ function updateCounter(cid) {
 }
 
 /**
+ * EVENT LISTENERS SETUP
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const clickLayers = document.querySelectorAll('.click-layer');
+    clickLayers.forEach(layer => {
+        layer.addEventListener('click', (event) => {
+            goToURL(event);
+        });
+    });
+
+    const controlButtons = document.querySelectorAll('.controls-overlay button');
+    controlButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const action = button.getAttribute('data-action');
+            videoAction(event, action);
+        });
+    });
+});
+
+/**
  * Monitors YouTube Player state changes (Play, Pause, etc.).
  * @param {Object} event - The event object from YouTube API.
  * @param {string} cid - The ID of the container.

@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const ENVIRONMENT = process.env.NODE_ENV || "development";
 
 if (!GEMINI_API_KEY) {
   console.warn("WARNING: GEMINI_API_KEY not defined in .env.");
@@ -79,58 +80,68 @@ function getRandomContent() {
 app.get("/api/content", async (req, res) => {
   const { brand = "Nike", country = "Colombia", product = "zapatillas" } = req.query;
 
-  try {
-    // Acquire the model instance. Adjust parameters according to the SDK's API.
-    const model = genAI.getGenerativeModel(
-      { model: "gemini-2.5-flash" },
-      { apiVersion: "v1" }
-    );
+  if (ENVIRONMENT === "production") {
+    try {
+      // Acquire the model instance. Adjust parameters according to the SDK's API.
+      const model = genAI.getGenerativeModel(
+        { model: "gemini-2.5-flash" },
+        { apiVersion: "v1" }
+      );
 
-    // Build the prompt. The instruction forces the model to output only JSON
-    // with the exact structure the client expects. This helps simplify parsing.
-    const prompt = `Actúa como un creativo publicitario. Genera un objeto JSON para un anuncio de la marca ${brand} en ${country} sobre ${product} en el contexto: ${getRandomContent()}
-    El JSON debe tener exactamente esta estructura:
-    {
-      "text": "un eslogan creativo de máximo 40 caracteres",
-      "cta": "texto del botón (ej: Compra ya)",
-      "color": "un color hexadecimal que combine con la marca"
+      // Build the prompt. The instruction forces the model to output only JSON
+      // with the exact structure the client expects. This helps simplify parsing.
+      const prompt = `Actúa como un creativo publicitario. Genera un objeto JSON para un anuncio de la marca ${brand} en ${country} sobre ${product} en el contexto: ${getRandomContent()}
+      El JSON debe tener exactamente esta estructura:
+      {
+        "text": "un eslogan creativo de máximo 40 caracteres",
+        "cta": "texto del botón (ej: Compra ya)",
+        "color": "un color hexadecimal que combine con la marca"
+      }
+      Devuelve ÚNICAMENTE el código JSON, sin explicaciones ni marcas de markdown.`;
+
+      console.log("Sending prompt to Gemini:", prompt);
+
+      // Generate content using the model. The exact method names depend on the client lib.
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      let rawText = response.text();
+
+      // Remove possible markdown fences like ```json ... ``` to make parsing robust.
+      const cleanJson = rawText.replace(/```json|```/g, "").trim();
+
+      // Parse the JSON produced by the model
+      const adData = JSON.parse(cleanJson);
+
+      // Return structured ad data to the client
+      res.json({
+        brand,
+        country,
+        product,
+        text: adData.text,
+        cta: adData.cta,
+        color: adData.color
+      });
+
+    } catch (error) {
+      // Log detailed error for diagnostics and return a safe fallback object.
+      console.error("Error with Gemini request:", error);
+
+      res.status(200).json({
+        brand,
+        text: `Lo mejor de ${brand} en ${country}`,
+        cta: "Ver más",
+        color: "#333333"
+      });
     }
-    Devuelve ÚNICAMENTE el código JSON, sin explicaciones ni marcas de markdown.`;
-
-    console.log("Sending prompt to Gemini:", prompt);
-
-    // Generate content using the model. The exact method names depend on the client lib.
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let rawText = response.text();
-
-    // Remove possible markdown fences like ```json ... ``` to make parsing robust.
-    const cleanJson = rawText.replace(/```json|```/g, "").trim();
-
-    // Parse the JSON produced by the model
-    const adData = JSON.parse(cleanJson);
-
-    // Return structured ad data to the client
-    res.json({
-      brand,
-      country,
-      product,
-      text: adData.text,
-      cta: adData.cta,
-      color: adData.color
-    });
-
-  } catch (error) {
-    // Log detailed error for diagnostics and return a safe fallback object.
-    console.error("Error with Gemini request:", error);
-
-    res.status(200).json({
-      brand,
-      text: `Lo mejor de ${brand} en ${country}`,
-      cta: "Ver más",
-      color: "#333333"
-    });
-  }
+  } else {
+      // In non-production environments, return a random creative seed without calling the AI.
+      res.status(200).json({
+        brand,
+        text: `Lo mejor de ${brand} en ${country}`,
+        cta: "Ver más",
+        color: "#333333"
+      });
+    }
 });
 
 /**
