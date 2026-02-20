@@ -110,7 +110,7 @@ Los banners dinámicos en `04-dynamic-banner` consumen `/api/content`. Inicia el
 
 2. Crear `.env` en la raíz con la clave y puerto:
    ```env
-   GEMINI_API_KEY=tu_gemini_api_key_aqui
+   GEMINI_API_KEY=AIzaSyDQIY7VJR6-uBELQP-7Jyfw9FUedrgqHFs
    PORT=3000
    ```
 
