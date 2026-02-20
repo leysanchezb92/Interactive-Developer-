@@ -1,4 +1,3 @@
-/* Configuración General */
 body { 
     background: #f0f0f0; 
     display: flex; 
@@ -29,7 +28,6 @@ body {
     transition: border-color 0.5s ease;
 }
 
-/* Tamaños Específicos */
 .b-250 { 
     height: 250px; 
 }
@@ -39,7 +37,6 @@ body {
     padding: 40px 20px; 
 }
 
-/* Estilos de Contenido */
 .brand {
     font-weight: 900;
     font-size: 1.4rem;
@@ -66,7 +63,6 @@ body {
     margin-bottom: 15px; 
 }
 
-/* Botón con Animación Pulse */
 .cta-button {
     background: #00d4ff;
     border: none;

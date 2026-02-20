@@ -1,4 +1,3 @@
-/* 1. Definición de tamaños por clase */
 .banner-320x480 {
     --width: 320px;
     --height: 480px;
@@ -11,7 +10,6 @@
     margin: 10px;
 }
 
-/* 2. Configuración del cuerpo */
 body {
     margin: 0;
     padding: 20px;
@@ -23,7 +21,6 @@ body {
     background-color: #f0f0f0;
 }
 
-/* 3. Contenedor Base del Banner */
 [id^="banner-container-"] {
     width: var(--width);
     height: var(--height);
@@ -34,20 +31,18 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* 4. Contenedor del Video (YouTube API) */
 [id^="main-video-"] {
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Para que los clics pasen a la capa de interacción */
+    pointer-events: none;
 }
 
-/* 5. Capas de interacción */
 .click-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80%; /* Reducido un poco para que no bloquee los botones de abajo */
+    height: 80%;
     z-index: 10;
     cursor: pointer;
 }
@@ -57,7 +52,7 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 20; /* Por encima de la click-layer */
+    z-index: 20;
     display: flex;
     gap: 10px;
     background: rgba(0,0,0,0.6);
@@ -66,7 +61,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* 6. Botones y Contadores */
 button {
     cursor: pointer;
     border: none;
@@ -75,7 +69,8 @@ button {
     border-radius: 5px;
     font-size: 12px;
     font-weight: bold;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s;
+    transform: scale(1);
 }
 
 button:active {

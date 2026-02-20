@@ -10,12 +10,17 @@ body {
 
 .banner {
   border: 2px solid #333;
-  background: linear-gradient(135deg, #ff6f61, #ffcc70);
+  background: linear-gradient(135deg, #014eac, #9e7ffb);
   color: #fff;
   text-align: center;
   overflow: hidden;
   position: relative;
-  animation: fadeIn 1.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.banner-visible {
+  opacity: 1;
 }
 
 .banner-250 {
@@ -52,11 +57,6 @@ button {
 
 button:hover {
   background: #000;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 @keyframes slideIn {

@@ -80,14 +80,67 @@ Se implementó una capa de lógica para capturar interacciones de usuario de man
 
 ---
 
-## 🚀 Cómo visualizarlo
+## 🚀 Cómo visualizar localmente
 
-1.  **Clona el repositorio:**
-    ```bash
-    git clone [https://github.com/tu-usuario/nombre-del-repo.git](https://github.com/tu-usuario/nombre-del-repo.git)
-    ```
-2.  **Ejecución:** Abre los archivos `index.html` de cada carpeta en tu navegador preferido.
-3.  **Requisito:** Para los banners con API, asegúrate de tener una conexión a internet activa para el fetch de datos.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/leysanchezb92/Interactive-Developer-.git
+   ```
+
+2. Abre los `index.html` de cada carpeta en tu navegador o sirve la carpeta con un servidor estático:
+   ```bash
+   cd /ruta/al/proyecto/Interactive-Developer-
+   python3 -m http.server 8000
+   # luego abre http://localhost:8000/01-facebook-video/index.html (ejemplo)
+   ```
+
+3. Requisitos:
+   - Conexión a internet para llamadas a APIs externas.
+   - Para el banner dinámico, arranca el servidor API local (ver sección siguiente).
+
+---
+
+## 🖥 Ejecutar el servidor API para el Dynamic Banner (local)
+
+Los banners dinámicos en `04-dynamic-banner` consumen `/api/content`. Inicia el servidor antes de abrir los banners.
+
+1. Requisitos
+   - Node.js v24 instalado.
+   - El archivo `server.js` se encuentra en la raíz del proyecto (junto a este README).
+
+2. Crear `.env` en la raíz con la clave y puerto:
+   ```env
+   GEMINI_API_KEY=AIzaSyDQIY7VJR6-uBELQP-7Jyfw9FUedrgqHFs
+   PORT=3000
+   ```
+
+3. Instalar dependencias (una sola vez):
+   ```bash
+   npm init -y
+   npm install express cors dotenv @google/generative-ai
+   # opcional: npm install -D nodemon
+   ```
+
+4. Iniciar el servidor:
+   ```bash
+   node server.js
+   # o con nodemon:
+   npx nodemon server.js
+   ```
+
+5. Probar el endpoint:
+   ```bash
+   curl "http://localhost:3000/api/content?brand=Nike&country=Colombia&product=zapatillas"
+   ```
+
+6. Con el servidor corriendo, abre `04-dynamic-banner/index.html` (o sirve la carpeta con python http.server).
+
+Notas:
+- Si `server.js` está en `04-dynamic-banner/`, ejecuta los comandos desde esa carpeta y coloca `.env` ahí.
+- El servidor habilita CORS para permitir fetch desde páginas locales.
+- Asegúrate de no subir `.env` al repositorio (.gitignore debe incluirlo).
+
+---
 
 > [!NOTE]
 > Este proyecto fue desarrollado como parte de un desafío técnico de ingeniería para publicidad digital.
