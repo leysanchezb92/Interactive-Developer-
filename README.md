@@ -21,8 +21,6 @@ Este repositorio contiene una serie de desarrollos de publicidad digital interac
 
 ### 2. Contextual Weather Banner (Colombia)
 Banners dinámicos que cambian su diseño, mensaje y oferta de producto según el clima en tiempo real de ciudades colombianas (Bogotá, Medellín, Cali, etc.).
-* **Lógica de Negocio:** * Si **$Temp > 24°C$** → Creatividad de refresco/frío.
-    * Si **$Temp < 18°C$** → Creatividad de confort/caliente.
 
 ### 3. AI-Powered Dynamic Banner
 Banner conectado a un endpoint con más de 20 registros de contenido generado por IA.
@@ -37,37 +35,32 @@ INTERACTIVE-DEVELOPER/
 │
 ├── 01-facebook-video/
 │   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│       └── main.js
+│   ├── style.css
+│   └── main.js
 │
 ├── 02-instagram-carousel/
 │   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│       └── carousel.js
+│   ├── style.css
+│   └── carousel.js
 │
 ├── 03-weather-banner/
-│   ├── 300x250.html
-│   ├── 300x600.html
-│   ├── css/
-│   │   └── weather.css
-│   └── js/
-│       └── weather-api.js
+│   ├── index.html
+│   ├── weather.css
+│   └── weather.js
 │
 ├── 04-dynamic-banner/
-│   ├── index.html
-│   ├── css/
-│   │   └── dynamic.css
-│   ├── js/
-│   │   └── dynamic-engine.js
-│   └── data/
-│       └── content.json      <-- Aquí irían tus 20-30 registros de IA
+│   └──  index.html
+│   └── dynamic.css
+│   └── dynamic-engine.js
+│   └── server.js
 │
-├── README.md                 <-- El texto que preparamos antes
-└── .gitignore                <-- Para excluir archivos innecesarios
+├── README.md
+├── .env
+├── index.html
+├── style.css
+├── package.json
+├── .nvmrc
+└── .gitignore
 ```
 
 ## 📊 Medición y Eventos
