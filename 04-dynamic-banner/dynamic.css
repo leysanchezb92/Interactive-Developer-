@@ -63,3 +63,24 @@ button:hover {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+@media (min-width: 600px) {
+  body {
+    flex-direction: column;
+    height: auto;
+    padding: 40px 10px;
+    gap: 30px;
+  }
+
+  .banner-600 {
+    max-width: 90%;
+  }
+
+  .banner-250 {
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
